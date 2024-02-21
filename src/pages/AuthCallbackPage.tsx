@@ -12,6 +12,7 @@ const AuthCallbackPage = () => {
 
   useEffect(() => {
     if (user?.sub && user?.email && !hasCreatedUser.current) {
+      console.log(user);
       createUser({ auth0Id: user.sub, email: user.email });
       hasCreatedUser.current = true;
     }

@@ -5,9 +5,10 @@ const Footer = () => {
         <span className="text-2xl text-white font-bold tracking-tight">
           BiteBeat.com
         </span>
-        <span className="text-white font-bold tracking-tight flex gap-4">
+        <span className="text-white text-sm tracking-tight flex gap-4">
           <span>Privacy Policy</span>
           <span>Term of Service</span>
+          <span>Sell on BiteBeat.com</span>
         </span>
       </div>
     </div>

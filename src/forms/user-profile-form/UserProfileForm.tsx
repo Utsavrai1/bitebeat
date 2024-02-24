@@ -35,7 +35,13 @@ type Props = {
 const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: currentUser,
+    defaultValues: {
+      email: currentUser.email,
+      name: currentUser.name,
+      addressLine: currentUser.addressLine || "",
+      city: currentUser.city || "",
+      country: currentUser.country || "",
+    },
   });
 
   useEffect(() => {
@@ -132,7 +138,7 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
           />
         </div>
         {isLoading ? (
-          <LoadingButton />
+          <LoadingButton className="" />
         ) : (
           <Button type="submit" className="bg-red-500">
             Update

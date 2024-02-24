@@ -1,8 +1,8 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { useUserAuthState } from "@/api/AuthApi";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoutes = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useUserAuthState();
   return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
 };
 export default ProtectedRoutes;

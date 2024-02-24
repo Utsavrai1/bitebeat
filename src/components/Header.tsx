@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import MainNav from "./MainNav";
 
-export default function Header() {
+const Header = () => {
   return (
-    <div className="border-b-2 border-b-red-500 py-4">
+    <div className="sticky top-0 border-b-2 border-b-red-500 py-2 bg-white">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold tracking-tight text-red-500">
           BiteBeat.com
@@ -18,4 +18,6 @@ export default function Header() {
       </div>
     </div>
   );
-}
+};
+
+export default Header;

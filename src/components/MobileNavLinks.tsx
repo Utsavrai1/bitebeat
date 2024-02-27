@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useUserAuthState } from "@/api/AuthApi";
+import { useGetMyUser } from "@/api/MyUserApi";
 
 const MobileNavLinks = () => {
   const { logOut } = useUserAuthState();
+  const { currentUser, isLoading } = useGetMyUser();
+
   return (
     <>
       <Link
@@ -12,12 +15,14 @@ const MobileNavLinks = () => {
       >
         Order Status
       </Link>
-      <Link
-        to="/manage-restaurant"
-        className="flex bg-white items-center font-bold hover:text-red-500"
-      >
-        My Restaurant
-      </Link>
+      {!isLoading && currentUser?.userType == "seller" && (
+        <Link
+          to="/manage-restaurant"
+          className="flex bg-white items-center font-bold hover:text-red-500"
+        >
+          My Restaurant
+        </Link>
+      )}
       <Link
         to="/user-profile"
         className="flex bg-white items-center font-bold hover:text-red-500"

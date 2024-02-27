@@ -5,8 +5,13 @@ import HomePage from "./pages/HomePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import ProtectedRoutes from "./auth/ProtectedRoutes";
 import ManageRestaurantPage from "./pages/ManageRestaurantPage";
+import SearchPage from "./pages/SearchPage";
+import DetailPage from "./pages/DetailPage";
+import { useGetMyUser } from "./api/MyUserApi";
 
 const AppRoutes = () => {
+  const { currentUser, isLoading } = useGetMyUser();
+
   return (
     <Routes>
       <Route
@@ -18,6 +23,23 @@ const AppRoutes = () => {
         }
       />
       {/* <Route path="/auth-callback" element={<AuthCallbackPage />} /> */}
+      <Route
+        path="/search/:city"
+        element={
+          <Layout showHero={false}>
+            <SearchPage />
+          </Layout>
+        }
+      />
+
+      <Route
+        path="/detail/:restaurantId"
+        element={
+          <Layout showHero={false}>
+            <DetailPage />
+          </Layout>
+        }
+      />
 
       <Route element={<ProtectedRoutes />}>
         <Route
@@ -28,14 +50,16 @@ const AppRoutes = () => {
             </Layout>
           }
         />
-        <Route
-          path="/manage-restaurant"
-          element={
-            <Layout>
-              <ManageRestaurantPage />
-            </Layout>
-          }
-        />
+        {!isLoading && currentUser?.userType == "seller" && (
+          <Route
+            path="/manage-restaurant"
+            element={
+              <Layout>
+                <ManageRestaurantPage />
+              </Layout>
+            }
+          />
+        )}
       </Route>
 
       <Route path="*" element={<Navigate to="/" />} />

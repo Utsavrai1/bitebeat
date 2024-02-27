@@ -137,7 +137,7 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
         {isLoading ? (
           <LoadingButton className="" />
         ) : (
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Add Restaurant</Button>
         )}
       </form>
     </Form>

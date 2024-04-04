@@ -1,30 +1,67 @@
-# React + TypeScript + Vite
+# BiteBeat - Food Ordering Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BiteBeat is a food ordering application designed to provide users with a seamless experience in ordering food from their favorite restaurants. With BiteBeat, users can explore various restaurants, browse menus, place orders, and track deliveries conveniently.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication:** Users can sign up, sign in, and manage their profiles securely.
+- **Restaurant Listings:** Browse through a wide range of restaurants available for ordering.
+- **Menu Exploration:** View detailed menus with item descriptions, prices, and images.
+- **Order Placement:** Place orders effortlessly with just a few clicks.
+- **Order Tracking:** Track the status of your orders in real-time.
+- **Secure Payments:** Ensure secure transactions through integrated payment gateways.
+- **Order History:** Access your order history for easy reordering or tracking past transactions.
 
-## Expanding the ESLint configuration
+## Setup Instructions
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To set up and run BiteBeat locally, follow these steps:
 
-- Configure the top-level `parserOptions` property like this:
+1. **Clone the Repository:**
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+   ```bash
+   git clone https://github.com/Utsavrai1/bitebeat.git
+   cd BiteBeat
+
+2. **Install Dependencies:**
+
+
+   ```bash
+   npm install
+
+3. **Set Environment Variables:**  Create a `.env` file in the root directory and set the following variables:
+
+
+   ```bash
+   VITE_API_BASE_URL=http://localhost:3001
+
+4. **Run the Application:**
+
+
+    ```bash
+    npm run dev
+
+5. **Access BiteBeat:** Open your web browser and go to `http://localhost:3000`
+
+## Backend Repository
+
+The backend of BiteBeat is hosted in a separate repository. You can find the backend code and setup instructions at the following URL:
+
+[Backend Repository](https://github.com/Utsavrai1/bitebeat-backend.git)
+
+## Technologies Used
+
+**Frontend:**
+- React
+- Tailwind
+- shadcn
+  
+**Backend:**
+- Node.js (Express.js)
+- MongoDB (for database)
+- JWT (for authentication)
+
+**Others:**
+- Stripe API (for payments)
+- Axios (for HTTP requests)
+- bcrypt (for password hashing)

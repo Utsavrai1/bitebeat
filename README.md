@@ -2,6 +2,8 @@
 
 BiteBeat is a food ordering application designed to provide users with a seamless experience in ordering food from their favorite restaurants. With BiteBeat, users can explore various restaurants, browse menus, place orders, and track deliveries conveniently.
 
+## Hosted Website Url: [BiteBeat](https://bitebeat.onrender.com)
+
 ## Features
 
 - **User Authentication:** Users can sign up, sign in, and manage their profiles securely.

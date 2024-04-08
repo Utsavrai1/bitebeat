@@ -11,6 +11,7 @@ import {
 } from "@/api/AuthApi";
 import OtpForm from "@/forms/auth-form/OtpForm";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 const MainNav = () => {
   const { isAuthenticated } = useUserAuthState();
@@ -69,7 +70,12 @@ const MainNav = () => {
     <>
       <span className="flex space-x-2 items-center">
         {isAuthenticated ? (
-          <UserNameMenu />
+          <>
+            <Link to="/order-status" className="font-bold hover:text-red-500">
+              Order Status
+            </Link>
+            <UserNameMenu />
+          </>
         ) : (
           <>
             <Button

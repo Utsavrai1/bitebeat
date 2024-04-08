@@ -8,6 +8,7 @@ import ManageRestaurantPage from "./pages/ManageRestaurantPage";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
 import { useGetMyUser } from "./api/MyUserApi";
+import OrderStatusPage from "./pages/OrderStatusPage";
 
 const AppRoutes = () => {
   const { currentUser, isLoading } = useGetMyUser();
@@ -42,6 +43,14 @@ const AppRoutes = () => {
       />
 
       <Route element={<ProtectedRoutes />}>
+        <Route
+          path="/order-status"
+          element={
+            <Layout>
+              <OrderStatusPage />
+            </Layout>
+          }
+        />
         <Route
           path="/user-profile"
           element={

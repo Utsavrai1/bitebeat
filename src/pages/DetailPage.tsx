@@ -3,10 +3,13 @@ import MenuItem from "@/components/MenuItem";
 import OrderSummary from "@/components/OrderSummary";
 import RestaurantInfo from "@/components/RestaurantInfo";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Card } from "@/components/ui/card";
+import { Card, CardFooter } from "@/components/ui/card";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { MenuItemType } from "../types";
+import CheckoutButton from "@/components/CheckoutButton";
+import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
+import { useCreateCheckoutSession } from "@/api/OrderApi";
 
 export type CartItem = {
   _id: string;
@@ -18,7 +21,8 @@ export type CartItem = {
 const DetailPage = () => {
   const { restaurantId } = useParams();
   const { restaurant, isLoading } = useGetRestaurant(restaurantId);
-
+  const { createCheckoutSession, isLoading: isCheckoutLoading } =
+    useCreateCheckoutSession();
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const storedCartItems = sessionStorage.getItem(`cartItems-${restaurantId}`);
     return storedCartItems ? JSON.parse(storedCartItems) : [];
@@ -74,6 +78,31 @@ const DetailPage = () => {
     });
   };
 
+  const onCheckout = async (userFormData: UserFormData) => {
+    if (!restaurant) {
+      return;
+    }
+
+    const checkoutData = {
+      cartItems: cartItems.map((cartItem) => ({
+        menuItemId: cartItem._id,
+        name: cartItem.name,
+        quantity: cartItem.quantity.toString(),
+      })),
+      restaurantId: restaurant._id,
+      deliveryDetails: {
+        name: userFormData.name,
+        addressLine: userFormData.addressLine,
+        city: userFormData.city,
+        country: userFormData.country,
+        email: userFormData.email as string,
+      },
+    };
+
+    const data = await createCheckoutSession(checkoutData);
+    window.location.href = data.url;
+  };
+
   if (isLoading || !restaurant) {
     return "Loading...";
   }
@@ -90,8 +119,9 @@ const DetailPage = () => {
         <div className="flex flex-col gap-4">
           <RestaurantInfo restaurant={restaurant} />
           <span className="text-2xl font-bold tracking-tight">Menu</span>
-          {restaurant.menuItems.map((menuItem) => (
+          {restaurant.menuItems.map((menuItem, index) => (
             <MenuItem
+              key={index}
               menuItem={menuItem}
               addToCart={() => addToCart(menuItem)}
             />
@@ -106,6 +136,12 @@ const DetailPage = () => {
                 cartItems={cartItems}
                 removeFromCart={removeFromCart}
               />
+              <CardFooter>
+                <CheckoutButton
+                  onCheckout={onCheckout}
+                  isLoading={isCheckoutLoading}
+                />
+              </CardFooter>
             </Card>
           </div>
         )}

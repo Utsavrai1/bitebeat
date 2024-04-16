@@ -55,7 +55,7 @@ export type Order = {
   }[];
   deliveryDetails: {
     name: string;
-    addressLine1: string;
+    addressLine: string;
     city: string;
     email: string;
   };

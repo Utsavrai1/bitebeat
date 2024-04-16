@@ -2,6 +2,8 @@ import landingImage from "../assets/landing.png";
 import downloadImage from "../assets/appDownload.png";
 import SearchBar, { SearchForm } from "@/components/SearchBar";
 import { useNavigate } from "react-router-dom";
+import TopRestaurantCard from "@/components/TopRestaurantCard";
+import { useGetTopRestaurant } from "@/api/RestaurantApi";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -10,6 +12,12 @@ const HomePage = () => {
       pathname: `/search/${searchFormValues.searchQuery}`,
     });
   };
+
+  const { restaurants, isLoading } = useGetTopRestaurant();
+
+  if (isLoading || !restaurants || restaurants.length == 0) {
+    return <div></div>;
+  }
 
   return (
     <div className="flex flex-col gap-12">
@@ -23,6 +31,15 @@ const HomePage = () => {
           onSubmit={handleSearchSubmit}
         />
       </div>
+      <div className="overflow-x-auto scrollbar-none">
+        <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
+          {!isLoading &&
+            restaurants?.map((restaurant) => (
+              <TopRestaurantCard key={restaurant._id} restaurant={restaurant} />
+            ))}
+        </div>
+      </div>
+
       <div className="grid md:grid-cols-2 gap-5">
         <img src={landingImage} alt="Landing Image" />
         <div className="flex flex-col items-center justify-center gap-4 text-center">

@@ -20,7 +20,9 @@ export type CartItem = {
 
 const DetailPage = () => {
   const { restaurantId } = useParams();
-  const { restaurant, isLoading } = useGetRestaurant(restaurantId);
+
+  const { restaurant, isLoading: isGetRestaurantLoading } =
+    useGetRestaurant(restaurantId);
   const { createCheckoutSession, isLoading: isCheckoutLoading } =
     useCreateCheckoutSession();
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
@@ -103,7 +105,7 @@ const DetailPage = () => {
     window.location.href = data.url;
   };
 
-  if (isLoading || !restaurant) {
+  if (isGetRestaurantLoading || !restaurant) {
     return "Loading...";
   }
 
@@ -119,9 +121,8 @@ const DetailPage = () => {
         <div className="flex flex-col gap-4">
           <RestaurantInfo restaurant={restaurant} />
           <span className="text-2xl font-bold tracking-tight">Menu</span>
-          {restaurant.menuItems.map((menuItem, index) => (
+          {restaurant.menuItems.map((menuItem) => (
             <MenuItem
-              key={index}
               menuItem={menuItem}
               addToCart={() => addToCart(menuItem)}
             />

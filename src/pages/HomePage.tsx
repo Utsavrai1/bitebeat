@@ -4,6 +4,7 @@ import SearchBar, { SearchForm } from "@/components/SearchBar";
 import { useNavigate } from "react-router-dom";
 import TopRestaurantCard from "@/components/TopRestaurantCard";
 import { useGetTopRestaurant } from "@/api/RestaurantApi";
+import { LoaderIcons } from "@/components/LoaderIcon";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -16,7 +17,11 @@ const HomePage = () => {
   const { restaurants, isLoading } = useGetTopRestaurant();
 
   if (isLoading || !restaurants || restaurants.length == 0) {
-    return <div></div>;
+    return (
+      <div className="flex justify-center items-center">
+        <LoaderIcons.spinner className="h-10 w-10 animate-spin" />
+      </div>
+    );
   }
 
   return (

@@ -10,6 +10,7 @@ import { MenuItemType } from "../types";
 import CheckoutButton from "@/components/CheckoutButton";
 import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
 import { useCreateCheckoutSession } from "@/api/OrderApi";
+import { LoaderIcons } from "@/components/LoaderIcon";
 
 export type CartItem = {
   _id: string;
@@ -106,7 +107,11 @@ const DetailPage = () => {
   };
 
   if (isGetRestaurantLoading || !restaurant) {
-    return "Loading...";
+    return (
+      <div className="flex justify-center items-center h-full">
+        <LoaderIcons.spinner className="h-10 w-10 animate-spin" />
+      </div>
+    );
   }
 
   return (

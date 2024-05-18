@@ -1,5 +1,6 @@
 import { useSearchRestaurants } from "@/api/RestaurantApi";
 import CuisineFilter from "@/components/CuisineFilter";
+import { LoaderIcons } from "@/components/LoaderIcon";
 import PaginationSelector from "@/components/PaginationSelector";
 import SearchBar, { SearchForm } from "@/components/SearchBar";
 import SearchResultCard from "@/components/SearchResultCard";
@@ -68,7 +69,11 @@ const SearchPage = () => {
   };
 
   if (isLoading) {
-    <span>Loading ...</span>;
+    return (
+      <div className="flex justify-center items-center h-full">
+        <LoaderIcons.spinner className="h-10 w-10 animate-spin" />
+      </div>
+    );
   }
 
   if (!results?.data || !city) {

@@ -1,4 +1,5 @@
 import { useGetMyOrders } from "@/api/OrderApi";
+import { LoaderIcons } from "@/components/LoaderIcon";
 import OrderStatusDetail from "@/components/OrderStatusDetail";
 import OrderStatusHeader from "@/components/OrderStatusHeader";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
@@ -7,7 +8,11 @@ const OrderStatusPage = () => {
   const { orders, isLoading } = useGetMyOrders();
 
   if (isLoading) {
-    return "Loading...";
+    return (
+      <div className="flex justify-center items-center h-full">
+        <LoaderIcons.spinner className="h-10 w-10 animate-spin" />
+      </div>
+    );
   }
 
   if (!orders || orders.length === 0) {

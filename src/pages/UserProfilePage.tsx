@@ -1,4 +1,5 @@
 import { useGetMyUser, useUpdateMyUser } from "@/api/MyUserApi";
+import { LoaderIcons } from "@/components/LoaderIcon";
 import UserProfileForm from "@/forms/user-profile-form/UserProfileForm";
 
 const UserProfilePage = () => {
@@ -6,7 +7,11 @@ const UserProfilePage = () => {
   const { updateUser, isLoading: isUpdateLoading } = useUpdateMyUser();
 
   if (isGetLoading) {
-    return <span>Loading...</span>;
+    return (
+      <div className="flex justify-center items-center h-full">
+        <LoaderIcons.spinner className="h-10 w-10 animate-spin" />
+      </div>
+    );
   }
 
   if (!currentUser) {

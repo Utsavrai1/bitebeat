@@ -74,6 +74,10 @@ export const useCreateCheckoutSession = () => {
       throw new Error("Unable to create checkout session");
     }
 
+    sessionStorage.removeItem(
+      `cartItems-${checkoutSessionRequest.restaurantId}`
+    );
+
     return response.json();
   };
 

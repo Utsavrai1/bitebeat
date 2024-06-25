@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./AppRoutes";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Toaster } from "./components/ui/sonner";
+import "@smastrom/react-rating/style.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {

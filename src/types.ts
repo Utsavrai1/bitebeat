@@ -63,4 +63,12 @@ export type Order = {
   status: OrderStatus;
   createdAt: string;
   restaurantId: string;
+  rating?: Rating;
+};
+
+export type Rating = {
+  orderId: string;
+  restaurtId: string;
+  rating: number;
+  review: string;
 };
